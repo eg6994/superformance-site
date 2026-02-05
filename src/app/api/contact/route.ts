@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 export async function POST(request: NextRequest) {
-  // בדיקה אם המפתח קיים לפני שבכלל מתחילים
   const apiKey = process.env.RESEND_API_KEY;
   
   if (!apiKey) {
@@ -14,11 +13,11 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { name, email, message } = body;
 
-    // אתחול רק כאן מונע את השגיאה בזמן ה-Build
     const resend = new Resend(apiKey);
 
     await resend.emails.send({
-      from: 'Superformance Form <onboarding@resend.dev>',
+      // כאן העדכון: שימוש בדומיין המאומת שלך
+      from: 'Superformance Website <noreply@superformance.agency>',
       to: 'info@superformance.agency',
       subject: `New Message from ${name}`,
       html: `
