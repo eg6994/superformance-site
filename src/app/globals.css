@@ -2,21 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #000000;
-  --foreground: #ffffff;
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --radius: 0.75rem;
+  }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background) !important;
-  background-color: #000000 !important;
-  margin: 0;
-  padding: 0;
+  background-color: black;
+  color: white;
+  /* יצירת אפקט ההילה הירוקה ברקע */
+  background: radial-gradient(circle at top center, #062016 0%, #000000 100%);
+  min-height: 100vh;
 }
 
-/* מבטיח שכל דף ב-Next.js יתפרס על כל הגובה בשחור */
-html, body, #__next {
-  background-color: #000000 !important;
-  min-height: 100vh;
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
 }
