@@ -1,15 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-// אנחנו משתמשים במשתנה סביבה כדי לשמור על אבטחה
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
+  // בדיקה אם המפתח קיים לפני שבכלל מתחילים
+  const apiKey = process.env.RESEND_API_KEY;
+  
+  if (!apiKey) {
+    console.error("Missing RESEND_API_KEY in Environment Variables");
+    return NextResponse.json({ error: "Email service not configured" }, { status: 500 });
+  }
+
   try {
     const body = await request.json();
     const { name, email, message } = body;
 
-    // שליחת האימייל אליך
+    // אתחול רק כאן מונע את השגיאה בזמן ה-Build
+    const resend = new Resend(apiKey);
+
     await resend.emails.send({
       from: 'Superformance Form <onboarding@resend.dev>',
       to: 'info@superformance.agency',
