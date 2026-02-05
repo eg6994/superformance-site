@@ -14,7 +14,9 @@
     "react-dom": "^18",
     "lucide-react": "latest",
     "clsx": "latest",
-    "tailwind-merge": "latest"
+    "tailwind-merge": "latest",
+    "framer-motion": "latest",
+    "geist": "latest"
   },
   "devDependencies": {
     "postcss": "^8",
