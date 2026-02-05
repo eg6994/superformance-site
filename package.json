@@ -16,7 +16,10 @@
     "clsx": "latest",
     "tailwind-merge": "latest",
     "framer-motion": "latest",
-    "geist": "latest"
+    "geist": "latest",
+    "@radix-ui/react-slot": "latest",
+    "class-variance-authority": "latest",
+    "resend": "latest"
   },
   "devDependencies": {
     "postcss": "^8",
