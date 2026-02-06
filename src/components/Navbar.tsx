@@ -56,8 +56,15 @@ export function Navbar() {
       >
         <div className="container mx-auto px-4 md:px-6">
           <nav className="flex items-center justify-between">
-            {/* Logo - Always links to homepage */}
-            <Link href="/" className="flex items-center gap-2 group">
+            {/* Logo - Always links to homepage with full reload */}
+            <a
+              href="/"
+              className="flex items-center gap-2 group"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = "/";
+              }}
+            >
               <div className="relative w-10 h-10 flex items-center justify-center">
                 <div className="absolute inset-0 bg-primary/20 rounded-xl rotate-45 group-hover:rotate-90 transition-transform duration-300" />
                 <Rocket className="w-5 h-5 text-primary relative z-10 -rotate-45" />
@@ -65,7 +72,7 @@ export function Navbar() {
               <span className="text-xl font-bold tracking-tight">
                 SUPER<span className="text-primary">FORMANCE</span>
               </span>
-            </Link>
+            </a>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
