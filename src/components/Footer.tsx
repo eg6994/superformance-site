@@ -36,7 +36,14 @@ export function Footer() {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-6">
+            <a
+              href="/"
+              className="flex items-center gap-2 mb-6"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = "/";
+              }}
+            >
               <div className="relative w-10 h-10 flex items-center justify-center">
                 <div className="absolute inset-0 bg-primary/20 rounded-xl rotate-45" />
                 <Rocket className="w-5 h-5 text-primary relative z-10 -rotate-45" />
@@ -44,7 +51,7 @@ export function Footer() {
               <span className="text-xl font-bold tracking-tight">
                 SUPER<span className="text-primary">FORMANCE</span>
               </span>
-            </Link>
+            </a>
             <p className="text-muted-foreground mb-6 max-w-sm">
               Your trusted partner in digital transformation. We help businesses
               thrive in the digital age with innovative solutions and strategic expertise.
