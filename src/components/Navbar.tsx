@@ -4,18 +4,22 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Mission", href: "#mission" },
-  { name: "Services", href: "#services" },
-  { name: "Values", href: "#values" },
-  { name: "Blog", href: "#blog" },
+  { name: "About", href: "/#about", isAnchor: true },
+  { name: "Mission", href: "/#mission", isAnchor: true },
+  { name: "Services", href: "/#services", isAnchor: true },
+  { name: "Values", href: "/#values", isAnchor: true },
+  { name: "Blog", href: "/blog", isAnchor: false },
 ];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +28,21 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Handle navigation - for anchor links on homepage, use smooth scroll
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor: boolean) => {
+    if (isAnchor && isHomePage) {
+      e.preventDefault();
+      const targetId = href.replace("/#", "");
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+      setIsMobileMenuOpen(false);
+    } else {
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
     <>
@@ -37,8 +56,8 @@ export function Navbar() {
       >
         <div className="container mx-auto px-4 md:px-6">
           <nav className="flex items-center justify-between">
-            {/* Logo */}
-            <a href="#" className="flex items-center gap-2 group">
+            {/* Logo - Always links to homepage */}
+            <Link href="/" className="flex items-center gap-2 group">
               <div className="relative w-10 h-10 flex items-center justify-center">
                 <div className="absolute inset-0 bg-primary/20 rounded-xl rotate-45 group-hover:rotate-90 transition-transform duration-300" />
                 <Rocket className="w-5 h-5 text-primary relative z-10 -rotate-45" />
@@ -46,19 +65,20 @@ export function Navbar() {
               <span className="text-xl font-bold tracking-tight">
                 SUPER<span className="text-primary">FORMANCE</span>
               </span>
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href, link.isAnchor)}
                   className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
                 >
                   {link.name}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-                </a>
+                </Link>
               ))}
             </div>
 
@@ -68,7 +88,20 @@ export function Navbar() {
                 asChild
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6"
               >
-                <a href="#contact">Contact Us</a>
+                <Link
+                  href={isHomePage ? "#contact" : "/#contact"}
+                  onClick={(e) => {
+                    if (isHomePage) {
+                      e.preventDefault();
+                      const element = document.getElementById("contact");
+                      if (element) {
+                        element.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }
+                  }}
+                >
+                  Contact Us
+                </Link>
               </Button>
             </div>
 
@@ -96,22 +129,34 @@ export function Navbar() {
             <div className="container mx-auto px-4 py-6">
               <div className="flex flex-col gap-4">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.name}
                     href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href, link.isAnchor)}
                     className="text-lg font-medium text-foreground hover:text-primary transition-colors py-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 ))}
                 <Button
                   asChild
                   className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium w-full mt-4"
                 >
-                  <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link
+                    href={isHomePage ? "#contact" : "/#contact"}
+                    onClick={(e) => {
+                      if (isHomePage) {
+                        e.preventDefault();
+                        const element = document.getElementById("contact");
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
                     Contact Us
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { LogoMarquee } from "@/components/LogoMarquee";
 import { About } from "@/components/About";
 import { Mission } from "@/components/Mission";
 import { Services } from "@/components/Services";
@@ -16,6 +17,7 @@ export default function Home() {
     <main className="min-h-screen bg-background text-foreground">
       <Navbar />
       <Hero />
+      <LogoMarquee />
       <About />
       <Mission />
       <Services />

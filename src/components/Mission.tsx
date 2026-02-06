@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Lightbulb, Handshake, TrendingUp } from "lucide-react";
+import { Lightbulb, Handshake, TrendingUp, Star } from "lucide-react";
 import { useRef } from "react";
 import { Parallax, FloatingElement } from "@/components/Parallax";
 
@@ -90,40 +90,120 @@ export function Mission() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="glass-card p-8 md:p-12 max-w-5xl mx-auto glow mb-16"
           >
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <p className="text-lg text-foreground leading-relaxed mb-4">
-                  We are dedicated to helping our clients leverage digital technologies,
-                  maximize their online presence, and drive sustainable growth.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+            <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
+              {/* Text Content - 3 columns */}
+              <div className="md:col-span-3 space-y-6">
+                <div>
+                  <h3 className="text-2xl font-bold mb-4 text-foreground">
+                    Empowering Digital Excellence
+                  </h3>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    We are dedicated to helping our clients leverage cutting-edge digital
+                    technologies, maximize their online presence, and drive sustainable growth
+                    in an ever-evolving marketplace.
+                  </p>
+                </div>
+                <div className="h-px bg-gradient-to-r from-primary/50 via-amber-500/30 to-transparent" />
+                <p className="text-base text-muted-foreground leading-relaxed">
                   Through our collaborative approach, we aim to deliver exceptional value,
-                  build long-term partnerships, and be at the forefront of digital innovation.
+                  build long-term partnerships, and remain at the forefront of digital innovation.
                 </p>
               </div>
-              <Parallax speed={0.1} scale opacity>
-                <div className="relative">
-                  <div className="aspect-square rounded-2xl overflow-hidden relative">
-                    <img
-                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80"
-                      alt="Digital analytics dashboard"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-primary/20 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-emerald-500/20" />
+
+              {/* 10+ Years Badge - 2 columns */}
+              <div className="md:col-span-2">
+                <motion.div
+                  className="relative"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  {/* Outer glow */}
+                  <div className="absolute -inset-4 bg-gradient-to-br from-amber-500/20 via-yellow-500/10 to-amber-600/20 rounded-3xl blur-xl" />
+
+                  {/* Main card */}
+                  <div className="relative bg-gradient-to-br from-amber-950/40 via-yellow-950/30 to-amber-900/40 border border-amber-500/30 rounded-2xl p-8 text-center overflow-hidden">
+                    {/* Star decorations */}
+                    <div className="absolute top-3 left-3">
+                      <Star className="w-4 h-4 text-amber-400/60 fill-amber-400/40" />
+                    </div>
+                    <div className="absolute top-4 right-5">
+                      <Star className="w-3 h-3 text-amber-300/50 fill-amber-300/30" />
+                    </div>
+                    <div className="absolute bottom-4 left-5">
+                      <Star className="w-3 h-3 text-yellow-400/50 fill-yellow-400/30" />
+                    </div>
+                    <div className="absolute bottom-3 right-4">
+                      <Star className="w-4 h-4 text-amber-400/60 fill-amber-400/40" />
+                    </div>
+                    <div className="absolute top-1/2 left-2 -translate-y-1/2">
+                      <Star className="w-2 h-2 text-amber-300/40 fill-amber-300/20" />
+                    </div>
+                    <div className="absolute top-1/2 right-2 -translate-y-1/2">
+                      <Star className="w-2 h-2 text-yellow-300/40 fill-yellow-300/20" />
+                    </div>
+
+                    {/* Animated border glow */}
                     <motion.div
-                      className="absolute inset-4 border-2 border-primary/30 rounded-xl"
-                      animate={{ opacity: [0.3, 0.6, 0.3] }}
+                      className="absolute inset-0 rounded-2xl border-2 border-amber-400/20"
+                      animate={{
+                        boxShadow: [
+                          "inset 0 0 20px rgba(251, 191, 36, 0.1)",
+                          "inset 0 0 40px rgba(251, 191, 36, 0.2)",
+                          "inset 0 0 20px rgba(251, 191, 36, 0.1)"
+                        ]
+                      }}
                       transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
                     />
-                    <div className="absolute bottom-6 left-6 right-6 text-center">
-                      <div className="text-5xl font-bold text-gradient mb-2">10+</div>
-                      <div className="text-base text-foreground font-medium">Years of Excellence</div>
+
+                    {/* Content */}
+                    <div className="relative z-10">
+                      {/* Star icon */}
+                      <motion.div
+                        className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-amber-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-amber-500/30"
+                        animate={{ rotate: [0, 5, -5, 0] }}
+                        transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                      >
+                        <Star className="w-6 h-6 text-amber-950 fill-amber-950" />
+                      </motion.div>
+
+                      {/* Number */}
+                      <motion.div
+                        className="text-5xl md:text-6xl font-bold mb-2"
+                        style={{
+                          background: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 25%, #fcd34d 50%, #f59e0b 75%, #d97706 100%)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                          backgroundClip: "text",
+                        }}
+                      >
+                        10+
+                      </motion.div>
+
+                      {/* Label */}
+                      <div className="text-amber-200/90 font-semibold tracking-wide text-sm uppercase">
+                        Years of Excellence
+                      </div>
+
+                      {/* Subtitle */}
+                      <div className="mt-3 text-xs text-amber-300/60">
+                        Trusted by 150+ clients worldwide
+                      </div>
                     </div>
+
+                    {/* Subtle sparkle effect */}
+                    <motion.div
+                      className="absolute top-1/4 right-1/4 w-1 h-1 bg-amber-300 rounded-full"
+                      animate={{ opacity: [0, 1, 0], scale: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
+                    />
+                    <motion.div
+                      className="absolute bottom-1/3 left-1/3 w-1 h-1 bg-yellow-300 rounded-full"
+                      animate={{ opacity: [0, 1, 0], scale: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
+                    />
                   </div>
-                </div>
-              </Parallax>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
         </Parallax>

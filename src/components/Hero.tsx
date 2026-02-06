@@ -1,35 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { Counter } from "@/components/ScrollReveal";
-import { HeroSkeleton } from "@/components/HeroSkeleton";
 
 // Dynamic import for particle background - only loads on client
 const ParticleBackground = dynamic(
   () => import("@/components/ParticleBackground"),
-  { ssr: false }
+  { ssr: false, loading: () => null }
 );
 
 export function Hero() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate loading time for assets
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Show skeleton while loading
-  if (isLoading) {
-    return <HeroSkeleton />;
-  }
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
@@ -42,7 +25,7 @@ export function Hero() {
           className="absolute inset-0 w-full h-full object-cover opacity-40"
           loading="eager"
         />
-        {/* Video Overlay */}
+        {/* Video Overlay - loads on all browsers */}
         <video
           autoPlay
           muted
@@ -62,21 +45,37 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-500/5" />
       </div>
 
-      {/* Animated Particle Background - optimized for performance */}
+      {/* Animated Particle Background with WebGL */}
       <div className="absolute inset-0 z-[2]">
-        <ParticleBackground
-          particleCount={40}
-          color="34, 197, 94"
-          maxSpeed={0.3}
-          connectionDistance={90}
-        />
+        <ParticleBackground />
       </div>
 
-      {/* Background Effects - CSS animations for better performance */}
+      {/* Background Effects - Animated gradient orbs */}
       <div className="absolute inset-0 pointer-events-none z-[3]">
-        {/* Static gradient orbs - removed motion animations for performance */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl animate-pulse-slower" />
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl will-change-transform"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl will-change-transform"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{
+            duration: 10,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut"
+          }}
+        />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
       </div>
 
